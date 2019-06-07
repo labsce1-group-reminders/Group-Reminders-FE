@@ -14,6 +14,8 @@ import ContactModal from "components/UI/ContactModal/ContactModal.js";
 import AddMemberToTrainingSeries from "components/Pages/TrainingSeries/Add/AddMemberToTrainingSeries.js";
 
 import Dashboard from "../Dashboard";
+import { LandingPage } from 'components/Pages/LandingPage/LandingPage/';
+import WhoYouArePage from '../../WhoyouarePage/WhoyouarePage';
 
 function Routes(props) {
   const { setDisplaySnackbar, history, setIsTourOpen } = props;
@@ -106,6 +108,9 @@ function Routes(props) {
         )}
       />
       <Route path="/home/message/:id" component={MessagePage} />
+      
+      <Route exact path="/whoyouare" component={WhoYouArePage}></Route>
+
     </Router>
   );
 }
