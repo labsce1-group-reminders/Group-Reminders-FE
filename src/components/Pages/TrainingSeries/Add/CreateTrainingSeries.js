@@ -14,6 +14,7 @@ import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 class CreateTrainingSeries extends React.Component {
   state = {
     title: "",
+    country: "",
     isRouting: false
   };
 
@@ -23,7 +24,7 @@ class CreateTrainingSeries extends React.Component {
 
   handleTrainingSeriesSubmit = e => {
     e.preventDefault();
-    const data = { title: this.state.title, user_id: this.props.user_id };
+    const data = { title: this.state.title, country: this.state.country };
     this.props.addTrainingSeries(data);
 
     this.setState({ isRouting: true });
@@ -75,6 +76,15 @@ class CreateTrainingSeries extends React.Component {
               onChange={this.handleChange("title")}
               margin="normal"
               required
+            />
+            <TextField
+                id="standard-name"
+                label="Country"
+                className={classes.textField}
+                value={this.state.country}
+                onChange={this.handleChange("country")}
+                margin="normal"
+                required
             />
             <div>
               <Button
