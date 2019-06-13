@@ -38,10 +38,10 @@ function TabNavigation(props) {
         value="overview"
         icon={<Home />}
         color="primary"
-        onMouseEnter={e => {
+        onMouseEnter={ ()=> {
           setOverviewHover(true);
         }}
-        onMouseLeave={e => {
+        onMouseLeave={()=> {
           setOverviewHover(false);
         }}
       />
@@ -54,10 +54,10 @@ function TabNavigation(props) {
         label="Class Members"
         value="class members"
         icon={<PermIdentity />}
-        onMouseEnter={e => {
+        onMouseEnter={() => {
           setClassMembersHover(true);
         }}
-        onMouseLeave={e => {
+        onMouseLeave={() => {
           setClassMembersHover(false);
         }}
       />
@@ -70,10 +70,10 @@ function TabNavigation(props) {
           label="Class"
           value="class"
           icon={<PermIdentity />}
-          onMouseEnter={e => {
+          onMouseEnter={() => {
             setClassHover(true);
           }}
-          onMouseLeave={e => {
+          onMouseLeave={() => {
             setClassHover(false);
           }}
       />
@@ -86,10 +86,10 @@ function TabNavigation(props) {
         label="Training Series"
         value="training series"
         icon={<Timeline />}
-        onMouseEnter={e => {
+        onMouseEnter={() => {
           setTrainingSeriesHover(true);
         }}
-        onMouseLeave={e => {
+        onMouseLeave={() => {
           setTrainingSeriesHover(false);
         }}
       />
@@ -102,10 +102,10 @@ function TabNavigation(props) {
         label="Notifications"
         value="notifications"
         icon={<QuestionAnswer />}
-        onMouseEnter={e => {
+        onMouseEnter={() => {
           setMessagesHover(true);
         }}
-        onMouseLeave={e => {
+        onMouseLeave={() => {
           setMessagesHover(false);
         }}
       />
@@ -121,10 +121,10 @@ function TabNavigation(props) {
         label="Responses"
         value="responses"
         icon={<ModeComment />}
-        onMouseEnter={e => {
+        onMouseEnter={() => {
           setResponsesHover(true);
         }}
-        onMouseLeave={e => {
+        onMouseLeave={() => {
           setResponsesHover(false);
         }}
       />
