@@ -2,9 +2,9 @@ import React, { useReducer, useEffect } from "react";
 import { connect } from "react-redux";
 
 import {
-  addTeamMember,
-  editTeamMember,
-  getTeamMembers,
+  addClassMember,
+  editClassMember,
+  getClassMember,
   getAllMessages,
   getNotifications,
   addNotification,
@@ -29,55 +29,50 @@ import { styles, MainContainer, MemberInfoContainer } from "./styles.js";
 
 function Add(props) {
   const {
-    addTeamMember,
-    editTeamMember,
-    getTeamMembers,
+    addClassMember,
+    editClassMember,
+    getClassMember,
     getAllMessages,
     getNotifications,
     addNotification,
     deleteNotification,
-    user_id,
-    teamMember,
-    teamMembers,
+    classMember,
+    classMembers,
     notifications,
     messages
   } = props;
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
   useEffect(() => {
     // CDM
     getAllMessages();
     getNotifications();
-    getTeamMembers();
-    dispatch({ type: "UPDATE_MEMBER", key: "user_id", payload: user_id });
-    if (teamMember) {
-      const manager_id = teamMember.manager_id ? teamMember.manager_id : "";
-      const mentor_id = teamMember.mentor_id ? teamMember.mentor_id : "";
+    getClassMember();
+    // TODO not sure the need tp edit class_id vvv
+    if (classMember) {
+      const class_id = classMember.class_id ? classMember.class_id : "";
       dispatch({
         type: "EDITING_MEMBER",
-        payload: { ...teamMember, manager_id, mentor_id }
+        payload: { ...classMember, class_id }
       });
     }
   }, [
     getAllMessages,
     getNotifications,
-    getTeamMembers,
-    user_id,
+    getClassMember,
+    // user_id,
     dispatch,
-    teamMember
+    classMember
   ]);
-
   useEffect(() => {
     // Checks input conditions.  If all required field conditions are met, Add Member button is activated
     const payload = !(
-      state.teamMember.first_name &&
-      state.teamMember.last_name &&
-      state.teamMember.job_description &&
-      !phoneNumberTest(state.teamMember.phone_number)
+      state.classMember.first_name &&
+      state.classMember.last_name &&
+      !phoneNumberTest(state.classMember.phone_number)
     );
     dispatch({ type: "UPDATE_DISABLED", payload });
-  }, [state.teamMember]);
+  }, [state.classMember]);
 
   const updateMember = (key, value) => {
     dispatch({ type: "UPDATE_MEMBER", key, payload: value });
@@ -87,33 +82,30 @@ function Add(props) {
     e.preventDefault();
     const updateNotifObj = {
       state,
-      teamMembers,
+      classMembers,
       notifications,
       messages,
       deleteNotification,
       addNotification
     };
     updateNotifications(updateNotifObj);
-    editTeamMember(state.teamMember);
+    editClassMember(state.classMember);
     dispatch({ type: "DISPLAY_SNACKBAR", payload: true });
     history.push("/home");
   };
 
-  const addNewTeamMember = e => {
+  const addNewClassMember = e => {
     e.preventDefault();
-    const { teamMember } = state;
-    if (teamMember.manager_id === "") {
-      teamMember.manager_id = null;
+    const { classMember } = state;
+
+    if (classMember.class_id === "") {
+      classMember.class_id = null; // TODO class id should not be null
     }
-    if (teamMember.mentor_id === "") {
-      teamMember.mentor_id = null;
-    }
-    addTeamMember(state.teamMember);
+    addClassMember(state.classMember);
     dispatch({ type: "TOGGLE_ROUTING" });
     dispatch({ type: "DISPLAY_SNACKBAR", payload: true });
     history.push("/home");
   };
-
   const { classes } = props;
   return (
     <MainContainer
@@ -138,12 +130,12 @@ function Add(props) {
       <form
         className={classes.form}
         onSubmit={e =>
-          teamMember ? editExistingMember(e) : addNewTeamMember(e)
+            classMember ? editExistingMember(e) : addNewClassMember(e)
         }
       >
         <Paper className={classes.paper}>
           <Typography variant="title">
-            {teamMember ? "Edit Team Member" : "Add New Team Member"}
+            {classMember ? "Edit Class Member" : "Add New Class Member"}
           </Typography>
           <Divider className={classes.divider} />
           <MemberInfoContainer>
@@ -160,14 +152,14 @@ function Add(props) {
             <Relationships
               state={state}
               dispatch={dispatch}
-              teamMembers={teamMembers}
+              classMembers={classMembers}
             />
           </MemberInfoContainer>
 
           <Buttons
             state={state}
             classes={classes}
-            status={teamMember ? "edit" : "add"}
+            status={classMember ? "edit" : "add"}
           />
         </Paper>
       </form>
@@ -178,15 +170,15 @@ function Add(props) {
 const mapStateToProps = state => ({
   messages: state.messagesReducer.messages,
   notifications: state.notificationsReducer.notifications,
-  teamMembers: state.teamMembersReducer.teamMembers
+  classMembers: state.classMembersReducer.classMembers
 });
 
 export default connect(
   mapStateToProps,
   {
-    addTeamMember,
-    editTeamMember,
-    getTeamMembers,
+    addClassMember,
+    editClassMember,
+    getClassMember,
     getAllMessages,
     getNotifications,
     addNotification,

@@ -2,10 +2,10 @@ import React from "react";
 import { Router, Route } from "react-router-dom";
 
 import Profile from "components/Pages/Profile";
-import EditTeamMember from "components/Pages/TeamMembers/Edit/";
+import EditClassMember from "components/Pages/ClassMembers/Edit/";
 import CreateTrainingSeries from "components/Pages/TrainingSeries/Add/CreateTrainingSeries";
 import EditTrainingSeries from "components/Pages/TrainingSeries/Edit/";
-import AddTeamMember from "components/Pages/TeamMembers/Add/";
+import AddClassMember from "components/Pages/ClassMembers/Add/";
 import CreateMessage from "components/Pages/TrainingSeries/Add/CreateMessage";
 import MessagePage from "components/Pages/TrainingSeries/Add/MessagePage";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
@@ -73,15 +73,15 @@ function Routes(props) {
         )}
       />
       <Route
-        path="/home/team-member/:id"
+        path="/home/class-member/:id"
         render={renderProps => (
-          <EditTeamMember {...renderProps} user_id={props.user.id} />
+          <EditClassMember {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
-        path="/home/create-team-member/"
+        path="/home/create-class-member/"
         render={renderProps => (
-          <AddTeamMember {...renderProps} user_id={props.user.id} />
+          <AddClassMember {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route

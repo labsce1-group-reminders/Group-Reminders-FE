@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
-import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
-import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
+import ClassMembersOverview from "components/Pages/ClassMembers/List/Overview";
+import ClassMembersTab from "components/Pages/ClassMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
 import NotificationsCard from "components/Pages/Notifications/Card";
@@ -63,11 +63,11 @@ function Dashboard(props) {
             <SmallColumns>
               <SearchCard
                 user_id={user_id}
-                List={TeamMembersOverview}
+                List={ClassMembersOverview}
                 containerTourNum="1"
-                section="Team Members"
+                section="Class Members"
                 headerTourNum={["2", "3"]}
-                handleAdd={() => history.push("/home/create-team-member")}
+                handleAdd={() => history.push("/home/create-class-member")}
               />
               <Divider />
               <SearchCard
@@ -82,12 +82,12 @@ function Dashboard(props) {
           </>
         )}
 
-        {topTab === "team members" && (
+        {topTab === "class members" && (
           <SearchCard
             user_id={user_id}
-            List={TeamMembersTab}
-            section="Team Members"
-            handleAdd={() => history.push("/home/create-team-member")}
+            List={ClassMembersTab}
+            section="Class Members"
+            handleAdd={() => history.push("/home/create-class-member")}
             isSearching={true}
           />
         )}

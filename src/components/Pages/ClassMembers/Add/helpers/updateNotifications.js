@@ -1,14 +1,14 @@
 import moment from "moment";
 export default ({
   state,
-  teamMembers,
+  classMembers,
   notifications,
   messages,
   deleteNotification,
   addNotification
 }) => {
   // If the user updates a relationship (manager/mentor), this will update their notifications
-  const ogTM = teamMembers.find(tm => tm.id === state.teamMember.id);
+  const ogTM = classMembers.find(tm => tm.id === state.classMember.id);
   const roles = _getRoles(messages[0]);
   const changedRoles = [];
   const changedIDs = [];
@@ -30,11 +30,11 @@ export default ({
   };
 
   roles.forEach(role => {
-    if (role !== "team_member") {
+    if (role !== "class_member") {
       // Find any changed roles
       const role_id = `${role}_id`;
       const old_id = ogTM[role_id];
-      const new_id = state.teamMember[role_id];
+      const new_id = state.classMember[role_id];
 
       if (old_id !== new_id) {
         changedIDs.push({ role, old_id, new_id });
@@ -100,7 +100,7 @@ export default ({
             "3": "slack_uuid"
           };
           // If the mentor/manager doesn't have the original service,
-          const superior = teamMembers.find(tm => tm.id === changed.new_id);
+          const superior = classMembers.find(tm => tm.id === changed.new_id);
           const serviceProperty = serviceConversion[service_id];
           const serviceID = superior[serviceProperty] ? service_id : 1;
           addNotification({

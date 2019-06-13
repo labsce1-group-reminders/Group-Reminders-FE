@@ -1,21 +1,17 @@
 const emptyUser = {
   first_name: "",
   last_name: "",
-  job_description: "",
   email: "",
   phone_number: "",
-  user_id: "",
   slack_uuid: "",
-  manager_id: "",
-  mentor_id: ""
+  class_id: "",
 };
 
 export const initialState = {
-  teamMember: emptyUser,
+  classMember: emptyUser,
   isRouting: false,
   buttonDisabled: true,
   memberManager: "",
-  memberMentor: "",
   slackUsers: [],
   slackError: null,
   snackbar: false
@@ -26,15 +22,15 @@ export const reducer = (state, action) => {
     case "UPDATE_MEMBER":
       return {
         ...state,
-        teamMember: { ...state.teamMember, [action.key]: action.payload }
+        classMember: { ...state.classMember, [action.key]: action.payload }
       };
     case "EDITING_MEMBER":
       return {
         ...state,
-        teamMember: { ...state.teamMember, ...action.payload }
+        classMember: { ...state.classMember, ...action.payload }
       };
     case "CLEAR_MEMBER":
-      return { ...state, teamMember: emptyUser };
+      return { ...state, classMember: emptyUser };
     case "TOGGLE_ROUTING":
       return { ...state, isRouting: !state.isRouting };
     case "UPDATE_DISABLED":

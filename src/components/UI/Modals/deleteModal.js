@@ -11,7 +11,7 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import {
   deleteTrainingSeries,
-  deleteTeamMember,
+  deleteClassMember,
   deleteMessage,
   deleteUser,
   unassignTeamMember
@@ -90,14 +90,14 @@ class TrainingSeriesModal extends React.Component {
       case "message":
         this.props.deleteMessage(this.props.id);
         break;
-      case "teamMember":
-        this.props.deleteTeamMember(
-          this.props.teamMemberId,
+      case "classMember":
+        this.props.deleteClassMember(
+          this.props.classMemberId,
           this.props.user_id
         );
         break;
       case "inTeamMemberPage":
-        this.props.deleteTeamMember(this.props.teamMemberId);
+        this.props.deleteClassMember(this.props.classMemberId);
         break;
       case "trainingSeries":
         this.props.deleteTrainingSeries(
@@ -183,7 +183,7 @@ TrainingSeriesModal.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    deleteSuccess: state.teamMembersReducer.status.deleteSuccess
+    deleteSuccess: state.classMembersReducer.status.deleteSuccess
   };
 };
 
@@ -193,7 +193,7 @@ export default connect(
   mapStateToProps,
   {
     deleteMessage,
-    deleteTeamMember,
+    deleteClassMember,
     deleteUser,
     deleteTrainingSeries,
     unassignTeamMember

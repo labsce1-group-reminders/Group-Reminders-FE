@@ -7,7 +7,7 @@ import styled from "styled-components";
 import history from "history.js";
 
 import DeleteModal from "components/UI/Modals/deleteModal";
-import { getTeamMembers } from "store/actions";
+import { getClassMember } from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
@@ -16,28 +16,29 @@ import { ListStyles, styles } from "./styles.js";
 function Overview({
   user_id,
   getFiltered,
-  getTeamMembers,
-  teamMembers,
+  getClassMember,
+  classMembers,
   classes
 }) {
   useEffect(() => {
-    getTeamMembers(user_id);
-  }, [getTeamMembers, user_id]);
+    getClassMember(user_id);
+  }, [getClassMember, user_id]);
 
   return (
     <ListStyles>
-      {getFiltered(teamMembers).map(
-        ({ first_name, last_name, job_description, id, user_id }) => {
+      {getFiltered(classMembers).map(
+        ({ first_name, last_name, id, user_id, class_id }) => {
           return (
             <SingleMember key={id} component="li" className={classes.listItem}>
               <ListItemText
                 primary={first_name + " " + last_name}
-                secondary={`Job: ${job_description}`}
-                onClick={() => history.push(`/home/team-member/${id}`)}
+                secondary={"Class ID: "+ class_id}
+                onClick={() => history.push(`/home/class-member/${id}`)}
               />
+
               <DeleteModal
-                deleteType="teamMember"
-                teamMemberId={id}
+                deleteType="classMember"
+                classMemberId={id}
                 className={`material-icons ${classes.icons}`}
                 user_id={user_id}
               />
@@ -50,12 +51,12 @@ function Overview({
 }
 
 const mapStateToProps = state => ({
-  teamMembers: state.teamMembersReducer.teamMembers
+  classMembers: state.classMembersReducer.classMembers
 });
 
 export default connect(
   mapStateToProps,
-  { getTeamMembers }
+  { getClassMember }
 )(withStyles(styles)(Overview));
 
 const SingleMember = styled(ListItem)``;

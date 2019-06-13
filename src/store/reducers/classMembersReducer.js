@@ -1,7 +1,7 @@
 import {
-  FETCH_TEAM_FAIL,
-  FETCH_TEAM_SUCCESS,
-  FETCH_TEAM_START,
+  FETCH_CLASS_FAIL,
+  FETCH_CLASS_SUCCESS,
+  FETCH_CLASS_START,
   ADD_MEMBER_START,
   ADD_MEMBER_SUCCESS,
   ADD_MEMBER_FAIL,
@@ -17,8 +17,8 @@ import {
 } from "../actions";
 
 const initialState = {
-  teamMembers: [],
-  teamMember: {},
+  classMembers: [],
+  classMember: {},
   error: null,
   status: {
     isLoading: false,
@@ -38,9 +38,9 @@ const initialState = {
   }
 };
 
-const teamMembersReducer = (state = initialState, action) => {
+const classMembersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_TEAM_START:
+    case FETCH_CLASS_START:
       return {
         ...state,
         status: {
@@ -50,10 +50,10 @@ const teamMembersReducer = (state = initialState, action) => {
           loadFailed: false
         }
       };
-    case FETCH_TEAM_SUCCESS:
+    case FETCH_CLASS_SUCCESS:
       return {
         ...state,
-        teamMembers: action.payload.reverse(),
+        classMembers: action.payload.reverse(),
         status: {
           ...state.status,
           isLoading: false,
@@ -61,7 +61,7 @@ const teamMembersReducer = (state = initialState, action) => {
           loadFailed: false
         }
       };
-    case FETCH_TEAM_FAIL:
+    case FETCH_CLASS_FAIL:
       return {
         ...state,
         error: action.payload,
@@ -73,7 +73,7 @@ const teamMembersReducer = (state = initialState, action) => {
     case FETCH_SINGLE_MEMBER_START:
       return {
         ...state,
-        teamMember: {},
+        classMember: {},
         status: {
           ...state.status,
           isLoading: true,
@@ -84,7 +84,7 @@ const teamMembersReducer = (state = initialState, action) => {
     case FETCH_SINGLE_MEMBER_SUCCESS:
       return {
         ...state,
-        teamMember: action.payload,
+        classMember: action.payload,
         status: {
           ...state.status,
           isLoading: false,
@@ -116,8 +116,8 @@ const teamMembersReducer = (state = initialState, action) => {
     case ADD_MEMBER_SUCCESS:
       return {
         ...state,
-        teamMembers: [...state.teamMembers, action.payload],
-        teamMember: action.payload,
+        classMembers: [...state.classMembers, action.payload],
+        classMember: action.payload,
         status: {
           ...state.status,
           isAdding: false,
@@ -146,7 +146,7 @@ const teamMembersReducer = (state = initialState, action) => {
         }
       };
     case EDIT_MEMBER_SUCCESS:
-      const updatedMembers = state.teamMembers.map(member => {
+      const updatedMembers = state.classMembers.map(member => {
         if (member.id === action.payload.id) {
           return {
             ...member,
@@ -158,7 +158,7 @@ const teamMembersReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        teamMembers: updatedMembers,
+        classMembers: updatedMembers,
         status: {
           ...state.status,
           isEditing: false,
@@ -190,8 +190,8 @@ const teamMembersReducer = (state = initialState, action) => {
     case DELETE_MEMBER_SUCCESS:
       return {
         ...state,
-        teamMembers: [
-          ...state.teamMembers.filter(member => member.id !== action.payload)
+        classMembers: [
+          ...state.classMembers.filter(member => member.id !== action.payload)
         ],
         status: {
           ...state.status,
@@ -214,4 +214,4 @@ const teamMembersReducer = (state = initialState, action) => {
   }
 };
 
-export default teamMembersReducer;
+export default classMembersReducer;

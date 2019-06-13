@@ -1,4 +1,4 @@
-// Parent "card" container for any TeamMembers displays
+// Parent "card" container for any ClassMembers displays
 
 import React, { useState, Suspense } from "react";
 import { connect } from "react-redux";
@@ -11,6 +11,7 @@ import Pagination from "material-ui-flat-pagination";
 import { withStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core/";
 import { MessageContainer, styles } from "./styles.js";
+// import classMembersReducerucer from "../../../store/reducers/classMembersReducer";
 
 function SearchCard(props) {
   const [itemCount, setItemCount] = useState(0);
@@ -72,7 +73,7 @@ function SearchCard(props) {
 }
 
 const mapStateToProps = state => ({
-  isLoading: state.teamMembersReducer.status.isLoading
+  isLoading: state.classMembersReducer.status.isLoading
 });
 
 export default connect(mapStateToProps)(

@@ -36,11 +36,12 @@ class CreateMessage extends React.Component {
       subject: "",
       body: "",
       link: "",
+      status: 0,
       days_from_start: 1,
       training_series_id: "",
       for_manager: false,
-      for_mentor: false,
-      for_team_member: true
+      for_class: false,
+      for_class_member: true
     }
   };
 
@@ -159,17 +160,36 @@ class CreateMessage extends React.Component {
                       ...this.state,
                       message: {
                         ...this.state.message,
-                        for_team_member: !this.state.message.for_team_member
+                        for_class_member: !this.state.message.for_class_member
                       }
                     });
                   }}
                 >
                   <Checkbox
-                    checked={this.state.message.for_team_member}
+                    checked={this.state.message.for_class_member}
                     value="checkedB"
                     color="primary"
                   />
-                  Team Member
+                  Class Member
+                </div>
+                <div
+                    style={{ cursor: "pointer" }}
+                    onClick={e => {
+                      this.setState({
+                        ...this.state,
+                        message: {
+                          ...this.state.message,
+                          for_class: !this.state.message.for_class
+                        }
+                      });
+                    }}
+                >
+                  <Checkbox
+                      checked={this.state.message.for_class}
+                      value="checkedB"
+                      color="primary"
+                  />
+                  Class
                 </div>
                 <div
                   style={{ cursor: "pointer" }}
@@ -189,25 +209,6 @@ class CreateMessage extends React.Component {
                     color="primary"
                   />
                   Manager
-                </div>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={e => {
-                    this.setState({
-                      ...this.state,
-                      message: {
-                        ...this.state.message,
-                        for_mentor: !this.state.message.for_mentor
-                      }
-                    });
-                  }}
-                >
-                  <Checkbox
-                    checked={this.state.message.for_mentor}
-                    value="checkedB"
-                    color="primary"
-                  />
-                  Mentor
                 </div>
               </div>
             </CheckboxWrapper>

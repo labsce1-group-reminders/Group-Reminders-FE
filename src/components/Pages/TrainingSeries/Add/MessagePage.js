@@ -35,11 +35,12 @@ class MessagePage extends React.Component {
       subject: "",
       body: "",
       link: "",
-      days_from_start: "",
+      status: 0,
+      days_from_start: 1,
       training_series_id: "",
-      for_mentor: false,
       for_manager: false,
-      for_team_member: false,
+      for_class: false,
+      for_class_member: true,
       id: ""
     }
   };
@@ -145,17 +146,17 @@ class MessagePage extends React.Component {
                       ...this.state,
                       message: {
                         ...this.state.message,
-                        for_team_member: !this.state.message.for_team_member
+                        for_class_member: !this.state.message.for_class_member
                       }
                     });
                   }}
                 >
                   <Checkbox
-                    checked={this.state.message.for_team_member}
+                    checked={this.state.message.for_class_member}
                     value="checkedB"
                     color="primary"
                   />
-                  Team Member
+                  Class Member
                 </p>
                 <p
                   style={{ cursor: "pointer" }}
@@ -183,17 +184,17 @@ class MessagePage extends React.Component {
                       ...this.state,
                       message: {
                         ...this.state.message,
-                        for_mentor: !this.state.message.for_mentor
+                        for_class: !this.state.message.for_class
                       }
                     });
                   }}
                 >
                   <Checkbox
-                    checked={this.state.message.for_mentor}
+                    checked={this.state.message.for_class}
                     value="checkedB"
                     color="primary"
                   />
-                  Mentor
+                  Class
                 </p>
               </CheckBoxWrapper>
             </MessageContainer>

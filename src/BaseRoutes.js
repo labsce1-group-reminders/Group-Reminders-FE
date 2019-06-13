@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import LandingPage from "components/Pages/LandingPage/LandingPage/";
 import Pricing from "components/Pages/LandingPage/Pricing";
 import Team from "components/Pages/LandingPage/Team";
+
 import LoadDashboard from "components/Pages/Dashboard/Loader/";
 import Role from "./components/Pages/WhoyouarePage/Role";
 import Admin from "./components/Pages/WhoyouarePage/Admin";
@@ -14,7 +15,9 @@ import Manager from "./components/Pages/WhoyouarePage/Manager";
 
 import Callback from "components/Misc/Callback/Callback.js";
 import SlackCallback from "components/Misc/Callback/SlackCallback.js";
+
 import authenticate from "components/Misc/authenticate/authenticate.js";
+
 import rootReducer from "store/reducers";
 
 import history from "./history.js";
