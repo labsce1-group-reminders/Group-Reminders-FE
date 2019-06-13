@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getTeamMembers, getNotifications } from "store/actions";
+import { getClassMember, getNotifications } from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Paper, Button, Typography } from "@material-ui/core/";
@@ -20,14 +20,14 @@ function Assign(props) {
     user_id,
     history,
     match: { params },
-    getTeamMembers,
+    getClassMember,
     getNotifications
   } = props;
 
   useEffect(() => {
-    getTeamMembers(user_id);
+    getClassMember(user_id);
     getNotifications();
-  }, [getTeamMembers, getNotifications, user_id]);
+  }, [getClassMember, getNotifications, user_id]);
 
   // Filter unique team member IDs from notifications
   // Add is_sent to filter to remove old messages?
@@ -100,5 +100,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getTeamMembers, getNotifications }
+  { getClassMember, getNotifications }
 )(withStyles(styles)(Assign));
