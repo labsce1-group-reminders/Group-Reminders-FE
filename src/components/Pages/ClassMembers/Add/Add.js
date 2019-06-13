@@ -36,7 +36,6 @@ function Add(props) {
     getNotifications,
     addNotification,
     deleteNotification,
-    user_id,
     classMember,
     classMembers,
     notifications,
