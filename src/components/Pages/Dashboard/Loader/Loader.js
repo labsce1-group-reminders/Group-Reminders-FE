@@ -39,9 +39,10 @@ function Loader(props) {
     }
   }, [state]);
 
+  if(!props.doneLoading){
+    return  <ProgressCircle />
+  }
   return (
-    <>
-      {props.doneLoading ? (
         <>
           {displaySnackbar && (
             <Snackbar
@@ -68,10 +69,6 @@ function Loader(props) {
             />
           </DashboardContainer>
         </>
-      ) : (
-        <ProgressCircle />
-      )}
-    </>
   );
 }
 
