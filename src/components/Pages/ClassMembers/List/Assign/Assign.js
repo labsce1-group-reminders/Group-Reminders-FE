@@ -13,7 +13,7 @@ import { ListItem, ListItemText } from "@material-ui/core/";
 function Assign(props) {
   const {
     classes,
-    teamMembers,
+    classMembers,
     params,
     messages,
     notifications,
@@ -45,13 +45,13 @@ function Assign(props) {
 
   return (
     <>
-      {teamMembers.map(member => (
+      {classMembers.map(member => (
         <ListStyles key={member.id}>
           <ListItem className={classes.listItem}>
             <ListItemText
               primary={`Member: ${member.first_name} ${member.last_name}`}
               secondary={`Start Date: ${getStartDate(member.id)}`}
-              onClick={e => history.push(`/home/team-member/${member.id}`)}
+              onClick={e => history.push(`/home/class-member/${member.id}`)}
             />
             <ListButtonContainer>
               <DeleteModal
