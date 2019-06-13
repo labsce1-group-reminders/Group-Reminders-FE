@@ -31,8 +31,8 @@ function Buttons({ classes, state, status }) {
       ) : (
         <DeleteModal
           deleteType="inTeamMemberPage"
-          teamMemberId={state.teamMember.id}
-          user_id={state.teamMember.user_id}
+          classMemberId={state.classMember.id}
+          user_id={state.classMember.user_id}
           displayType="button"
         />
       )}
