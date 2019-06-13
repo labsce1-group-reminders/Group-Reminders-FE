@@ -50,7 +50,7 @@ function SelectSlackID({ updateMember, state, classes, dispatch }) {
           <InputLabel htmlFor={`slack-simple`}>{title}</InputLabel>
           <Select
             disabled={state.slackError}
-            value={state.teamMember.slack_uuid}
+            value={state.classMember.slack_uuid}
             onChange={e => updateMember("slack_uuid", e.target.value)}
             inputProps={{
               name: `slack`,
