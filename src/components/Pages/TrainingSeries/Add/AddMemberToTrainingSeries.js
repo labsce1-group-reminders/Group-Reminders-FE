@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { styles, Wrapper } from "./styles.js";
 import { withStyles } from "@material-ui/core/styles";
 import {
-  getTeamMembers,
+  getClassMember,
   getTrainingSeries,
   addNotification,
   getAllMessages
@@ -230,7 +230,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getTeamMembers,
+    getClassMember,
     getTrainingSeries,
     addNotification,
     getAllMessages
