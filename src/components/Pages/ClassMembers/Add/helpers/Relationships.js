@@ -8,16 +8,15 @@ import { withStyles } from "@material-ui/core/styles";
 
 import { styles } from "../styles.js";
 
-function Relationships({ state, dispatch, teamMembers, classes }) {
-  const roles = ["manager", "mentor"];
-
-  const teamMinusSelf = teamMembers.filter(m => m.id !== state.teamMember.id);
+function Relationships({ state, dispatch, classMembers, classes, classArray=[] }) {
+  const roles = ["class"];
+  const classMinusSelf = classArray.filter(m => m.id !== state.classMember.class_id);
 
   return (
     <>
       {roles.map(role => {
         let title = role[0].toUpperCase() + role.substring(1);
-        title = teamMinusSelf.length ? title : `Add Team Members First`;
+        title = classMinusSelf.length ? title : `Add a Class First`;
         const updateRole = (id, name) => {
           dispatch({ type: "UPDATE_MEMBER", key: `${role}_id`, payload: id });
           dispatch({
@@ -29,8 +28,8 @@ function Relationships({ state, dispatch, teamMembers, classes }) {
           <FormControl key={role} className={classes.formControl}>
             <InputLabel htmlFor={`${role}-simple`}>{title}</InputLabel>
             <Select
-              disabled={!teamMinusSelf.length}
-              value={state.teamMember[`${role}_id`]}
+              disabled={!classMinusSelf.length}
+              value={state.classMember[`${role}_id`]}
               onChange={(e, value) => {
                 updateRole(e.target.value, value.props.children);
               }}
@@ -42,8 +41,8 @@ function Relationships({ state, dispatch, teamMembers, classes }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {teamMinusSelf.map(m => {
-                const name = `${m.first_name} ${m.last_name}`;
+              {classMinusSelf.map(m => {
+                const name = `${m.title}`;
                 return (
                   <MenuItem key={`${role}_${m.id}`} value={m.id}>
                     {name}
