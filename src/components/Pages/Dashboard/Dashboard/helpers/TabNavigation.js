@@ -13,7 +13,8 @@ import { styles, Popover } from "../styles.js";
 function TabNavigation(props) {
   const { classes, newResponses } = props;
   const [overviewHover, setOverviewHover] = useState(false);
-  const [teamMembersHover, setTeamMembersHover] = useState(false);
+  const [classMembersHover, setClassMembersHover] = useState(false);
+  const [classHover, setClassHover] = useState(false);
   const [trainingSeriesHover, setTrainingSeriesHover] = useState(false);
   const [messagesHover, setMessagesHover] = useState(false);
   const [responsesHover, setResponsesHover] = useState(false);
@@ -50,20 +51,36 @@ function TabNavigation(props) {
         Overview
       </Popover>
       <BottomNavigationAction
-        label="Team Members"
-        value="team members"
+        label="Class Members"
+        value="class members"
         icon={<PermIdentity />}
         onMouseEnter={e => {
-          setTeamMembersHover(true);
+          setClassMembersHover(true);
         }}
         onMouseLeave={e => {
-          setTeamMembersHover(false);
+          setClassMembersHover(false);
         }}
       />
       <Popover
-        style={teamMembersHover ? { display: "block" } : { display: "none" }}
+        style={classMembersHover ? { display: "block" } : { display: "none" }}
       >
-        Team Members
+        Class Members
+      </Popover>
+      <BottomNavigationAction
+          label="Class"
+          value="class"
+          icon={<PermIdentity />}
+          onMouseEnter={e => {
+            setClassHover(true);
+          }}
+          onMouseLeave={e => {
+            setClassHover(false);
+          }}
+      />
+      <Popover
+          style={classHover ? { display: "block" } : { display: "none" }}
+      >
+        Class
       </Popover>
       <BottomNavigationAction
         label="Training Series"
