@@ -57,6 +57,7 @@ class SimpleTabs extends React.Component {
             <Tab label="Training Series" />
             <Tab label="Notifications" />
             <Tab label="Responses" />
+            <Tab label="Groups" />
           </TabsStyled>
         </AppBar>
       // </div>
