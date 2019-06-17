@@ -18,7 +18,7 @@ function TabNavigation(props) {
   const [trainingSeriesHover, setTrainingSeriesHover] = useState(false);
   const [messagesHover, setMessagesHover] = useState(false);
   const [responsesHover, setResponsesHover] = useState(false);
-  const [groupsHover, setGroupsHover] = useState(false);
+  const [classesHover, setClassesHover] = useState(false);
 
   return (
     <BottomNavigation
@@ -136,20 +136,20 @@ function TabNavigation(props) {
         Responses
       </Popover>
       <BottomNavigationAction
-        label="Groups"
-        value="Groups"
+        label="Classes"
+        value="classes"
         icon={<PermIdentity />}
         onMouseEnter={() => {
-          setGroupsHover(true);
+          setClassesHover(true);
         }}
         onMouseLeave={() => {
-          setGroupsHover(false);
+          setClassesHover(false);
         }}
       />
       <Popover
-        style={groupsHover ? { display: "block" } : { display: "none" }}
+        style={classesHover ? { display: "block" } : { display: "none" }}
       >
-        Groups
+        Classes
       </Popover>
     </BottomNavigation>
   );
