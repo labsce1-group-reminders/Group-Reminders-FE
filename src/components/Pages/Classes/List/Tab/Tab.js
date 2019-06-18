@@ -8,14 +8,15 @@ import { getClasses } from "store/actions";
 import { Classes } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
-function Tab({ id, getFiltered, classes }) {
+function Tab({ id, getFiltered, getClasses, classes, dispatch }) {
   useEffect(() => {
-    console.log("USe effect");
-    getClasses(id);
+    console.log("use effect", id)
+    getClasses();
     
   }, [getClasses, id]);
 
   return (
+    
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       {getFiltered(classes).map(classObj => {
         const className = classObj.title
@@ -40,9 +41,12 @@ function Tab({ id, getFiltered, classes }) {
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  console.log("map state to props", state);
+  return ({
   classes: state.classesReducer.classes
 });
+}
 
 export default connect(
   mapStateToProps,

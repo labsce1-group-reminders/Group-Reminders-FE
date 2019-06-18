@@ -26,7 +26,7 @@ const classesReducer = (state = initialState, action) => {
           loadSuccess: false,
           loadFailed: false
         }
-      };
+    };
     case FETCH_CLASSES_SUCCESS:
       return {
         ...state,
@@ -37,7 +37,7 @@ const classesReducer = (state = initialState, action) => {
           loadSuccess: true,
           loadFailed: false
         }
-      };
+    };
     case FETCH_CLASSES_FAIL:
       return {
         ...state,
@@ -46,8 +46,10 @@ const classesReducer = (state = initialState, action) => {
           ...state.status,
           loadFailed: true
         }
-      };
-    }
+    };
+    default:
+      return state;
   }
+}
 
 export default classesReducer;
