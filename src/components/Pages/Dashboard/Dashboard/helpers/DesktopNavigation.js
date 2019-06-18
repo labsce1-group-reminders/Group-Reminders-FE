@@ -28,7 +28,9 @@ class SimpleTabs extends React.Component {
       ? this.props.setTopTab("training series")
       : value === 3
       ? this.props.setTopTab("notifications")
-      : this.props.setTopTab("responses");
+      : value === 4 
+      ? this.props.setTopTab("responses") 
+      : this.props.setTopTab("classes");
 
     this.setState({
       value
@@ -57,6 +59,7 @@ class SimpleTabs extends React.Component {
             <Tab label="Training Series" />
             <Tab label="Notifications" />
             <Tab label="Responses" />
+            <Tab label="Classes" />
           </TabsStyled>
         </AppBar>
       // </div>
