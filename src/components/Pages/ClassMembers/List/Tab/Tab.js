@@ -4,29 +4,38 @@ import { connect } from "react-redux";
 
 import history from "history.js";
 import DeleteModal from "components/UI/Modals/deleteModal";
-import { getClassMember } from "store/actions";
-
+import { getClassMember, getClasses } from "store/actions";
 import { TeamsMember } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
-function Tab({ user_id, getFiltered, getClassMember, classMembers, classes }) {
+function Tab({ user_id, getFiltered, getClassMember, classMembers, getClasses, classes }) {
+
   useEffect(() => {
-    getClassMember(user_id);
+    getClassMember();
   }, [getClassMember, user_id]);
 
+  useEffect(() => {
+    getClasses();
+  }, [ user_id]);
+
+  // change classesArray to key-value pair, for better performance in accessing individual class.
+  let classObj = {};
+  classes.forEach( c => {
+    classObj[c.id] = c;
+  });
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       {getFiltered(classMembers).map(classMember => {
         // TODO actually loop through classes and find the class name by id
-        const classObj = classMembers.find(tm => tm.id === classMember.class_id);
-        const className = classObj.title
-          ? `${classObj.title}`
+        // const classObj = classObj[classMember.class_id];
+        const className = classObj ? `${classObj[classMember.class_id].title}`
           : "Not assigned (TODO: fix)";
+
         return (
           <TeamsMember key={classMember.id}>
             <div
               style={{ cursor: "pointer" }}
-              onClick={e => {
+              onClick={() => {
                 history.push(`/home/class-member/${classMember.id}`);
               }}
             >
@@ -57,11 +66,12 @@ function Tab({ user_id, getFiltered, getClassMember, classMembers, classes }) {
 }
 
 const mapStateToProps = state => ({
-  classMembers: state.classMembersReducer.classMembers
+  classMembers: state.classMembersReducer.classMembers,
+  classes: state.classesReducer.classes,
 });
 
 export default connect(
   mapStateToProps,
-  { getClassMember }
+  { getClassMember, getClasses }
 )(Tab);
 //(withStyles(styles)(Tab));

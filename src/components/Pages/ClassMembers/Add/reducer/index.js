@@ -11,7 +11,7 @@ export const initialState = {
   classMember: emptyUser,
   isRouting: false,
   buttonDisabled: true,
-  memberManager: "",
+  memberClass: "",
   slackUsers: [],
   slackError: null,
   snackbar: false
@@ -35,8 +35,8 @@ export const reducer = (state, action) => {
       return { ...state, isRouting: !state.isRouting };
     case "UPDATE_DISABLED":
       return { ...state, buttonDisabled: action.payload };
-    case "UPDATE_MANAGER_NAME":
-      return { ...state, memberManager: action.payload };
+    case "UPDATE_CLASS_NAME":
+      return { ...state, memberClass: action.payload };
     case "UPDATE_MENTOR_NAME":
       return { ...state, memberMentor: action.payload };
     case "UPDATE_SLACK_USERS":

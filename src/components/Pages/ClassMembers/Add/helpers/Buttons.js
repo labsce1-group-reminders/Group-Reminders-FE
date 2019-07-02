@@ -30,7 +30,7 @@ function Buttons({ classes, state, status }) {
         <Button className={classes.button}>Cancel</Button>
       ) : (
         <DeleteModal
-          deleteType="inTeamMemberPage"
+          deleteType="inClassMemberPage"
           classMemberId={state.classMember.id}
           user_id={state.classMember.user_id}
           displayType="button"
@@ -38,7 +38,7 @@ function Buttons({ classes, state, status }) {
       )}
       {state.snackbar && (
         <Snackbar
-          message={`Your team member have been successfully ${status}ed.`}
+          message={`Your class member have been successfully ${status}ed.`}
           type="success"
         />
       )}

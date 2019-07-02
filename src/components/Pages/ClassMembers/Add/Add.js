@@ -36,10 +36,12 @@ function Add(props) {
     getNotifications,
     addNotification,
     deleteNotification,
+    classesArray,
     classMember,
     classMembers,
     notifications,
-    messages
+    messages,
+    user_id
   } = props;
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -48,7 +50,7 @@ function Add(props) {
     getAllMessages();
     getNotifications();
     getClassMember();
-    // TODO not sure the need tp edit class_id vvv
+    // TODO not sure the need to edit class_id vvv
     if (classMember) {
       const class_id = classMember.class_id ? classMember.class_id : "";
       dispatch({
@@ -60,7 +62,7 @@ function Add(props) {
     getAllMessages,
     getNotifications,
     getClassMember,
-    // user_id,
+    user_id,
     dispatch,
     classMember
   ]);
@@ -72,7 +74,7 @@ function Add(props) {
       !phoneNumberTest(state.classMember.phone_number)
     );
     dispatch({ type: "UPDATE_DISABLED", payload });
-  }, [state.classMember]);
+  }, [state.classMember, user_id]);
 
   const updateMember = (key, value) => {
     dispatch({ type: "UPDATE_MEMBER", key, payload: value });
@@ -153,6 +155,7 @@ function Add(props) {
               state={state}
               dispatch={dispatch}
               classMembers={classMembers}
+              classesArray={classesArray}
             />
           </MemberInfoContainer>
 
@@ -170,7 +173,8 @@ function Add(props) {
 const mapStateToProps = state => ({
   messages: state.messagesReducer.messages,
   notifications: state.notificationsReducer.notifications,
-  classMembers: state.classMembersReducer.classMembers
+  classMembers: state.classMembersReducer.classMembers,
+  classesArray: state.classesReducer.classes,
 });
 
 export default connect(

@@ -4,57 +4,63 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 
-import { styles } from "../styles.js";
+import {styles} from "../styles.js";
+// import {initialState, reducer} from "../reducer";
 
-function Relationships({ state, dispatch, classMembers, classes, classArray=[] }) {
-  const roles = ["class"];
-  const classMinusSelf = classArray.filter(m => m.id !== state.classMember.class_id);
+function Relationships({state, dispatch, classMembers, classes, classesArray = []}) {
+    const roles = ["class"];
+    const classMinusSelf = classesArray.filter(m => m.id !== state.classMember.class_id);
+    const classSelf = classesArray.filter(m => m.id === state.classMember.class_id);
 
-  return (
-    <>
-      {roles.map(role => {
+    const [memberClass, setMemberClass] = React.useState({
+        title: classSelf.length !== 0 ? classSelf[0]["title"]: "Select class",
+    });
+    const updateRole =  async (event) => {
+        try{
+            dispatch({type: "UPDATE_MEMBER", key: `class_id`, payload: event.target.value});
+            console.log("memberClass=",{memberClass})
+        }catch (error) {
+            dispatch({type: "UPDATE_MEMBER_FAILED", key: `class_id`, payload: error});
+        }
+    };
+
+    let relations = roles.map(role => {
         let title = role[0].toUpperCase() + role.substring(1);
         title = classMinusSelf.length ? title : `Add a Class First`;
-        const updateRole = (id, name) => {
-          dispatch({ type: "UPDATE_MEMBER", key: `${role}_id`, payload: id });
-          dispatch({
-            type: `UPDATE_${role.toUpperCase()}_NAME`,
-            payload: name
-          });
-        };
         return (
-          <FormControl key={role} className={classes.formControl}>
-            <InputLabel htmlFor={`${role}-simple`}>{title}</InputLabel>
-            <Select
-              disabled={!classMinusSelf.length}
-              value={state.classMember[`${role}_id`]}
-              onChange={(e, value) => {
-                updateRole(e.target.value, value.props.children);
-              }}
-              inputProps={{
-                name: `member${title}`,
-                id: `${role}-simple`
-              }}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {classMinusSelf.map(m => {
-                const name = `${m.title}`;
-                return (
-                  <MenuItem key={`${role}_${m.id}`} value={m.id}>
-                    {name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
+            <FormControl key={role} className={classes.formControl}>
+                <InputLabel htmlFor={`${role}-simple`}>{title}</InputLabel>
+                <Select
+                    disabled={!classMinusSelf.length}
+                    onChange={event => {
+                        updateRole(event)
+                            .finally(()=> setMemberClass({ "title": event.target.value}))
+                    }}
+                    value={memberClass.title}
+                    inputProps={{
+                        name: `title`,
+                        id: `${role}-simple`,
+                    }}
+                >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    {classMinusSelf.map(m =>
+                        <MenuItem key={`${role}_${m.id}`} value={m.id}>
+                            {m.title}
+                        </MenuItem>
+                    )}
+                </Select>
+            </FormControl>
         );
-      })}
-    </>
-  );
+    });
+    return (
+        <>
+            {relations}
+        </>
+    );
 }
 
 export default withStyles(styles)(Relationships);
