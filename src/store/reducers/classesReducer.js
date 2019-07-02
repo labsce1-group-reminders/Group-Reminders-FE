@@ -15,7 +15,6 @@ const initialState = {
 };
 
 const classesReducer = (state = initialState, action) => {
-  console.log(state, action)
   switch (action.type) {
     case FETCH_CLASSES_START:
       return {
@@ -50,6 +49,6 @@ const classesReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default classesReducer;
