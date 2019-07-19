@@ -4,14 +4,11 @@ import { Route, Router } from "react-router-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-import LandingPage from "components/Pages/LandingPage/LandingPage/";
-import Pricing from "components/Pages/LandingPage/Pricing";
-import Team from "components/Pages/LandingPage/Team";
+import LandingPage from "components/Feature/LandingPage/LandingPage/";
+import Pricing from "components/Feature/LandingPage/Pricing";
+import Team from "components/Feature/LandingPage/Team";
 
-import LoadDashboard from "components/Pages/Dashboard/Loader/";
-import Role from "./components/Pages/WhoyouarePage/Role";
-import Admin from "./components/Pages/WhoyouarePage/Admin";
-import Manager from "./components/Pages/WhoyouarePage/Manager";
+import LoadDashboard from "components/Feature/Dashboard/Loader/";
 
 import Callback from "components/Misc/Callback/Callback.js";
 import SlackCallback from "components/Misc/Callback/SlackCallback.js";
@@ -39,9 +36,6 @@ function Routes() {
         <Route path="/home" component={authenticate(LoadDashboard)} />
         <Route path="/callback" component={Callback} />
         <Route path="/slack-callback" component={SlackCallback} />
-        <Route exact path="/role" component={Role} />
-        <Route path="/admin" component={Admin} />
-        <Route path="/manager" component={Manager} />
       </Router>
     </Provider>
   );
