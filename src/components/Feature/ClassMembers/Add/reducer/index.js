@@ -3,8 +3,6 @@ const emptyUser = {
   last_name: "",
   email: "",
   phone_number: "",
-  slack_uuid: "",
-  class_id: "",
 };
 
 export const initialState = {

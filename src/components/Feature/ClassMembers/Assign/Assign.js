@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getClassMember, getNotifications } from "store/actions";
+import { getClassMember, getNotifications, getTrainingSeriesClassMembers,
+} from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Paper, Button, Typography } from "@material-ui/core/";
@@ -21,48 +22,48 @@ function Assign(props) {
     history,
     match: { params },
     getClassMember,
-    getNotifications
+    getTrainingSeriesClassMembers,
+      id,
   } = props;
 
   useEffect(() => {
     getClassMember(user_id);
-    getNotifications();
-  }, [getClassMember, getNotifications, user_id]);
+    getTrainingSeriesClassMembers(id);
+  }, [getClassMember, getTrainingSeriesClassMembers, id, user_id]);
 
-  // Filter unique team member IDs from notifications
+  // Filter unique class member IDs from notifications
   // Add is_sent to filter to remove old messages?
-  const tmIDs = new Set(
-    props.notifications
+  const cmIDs = new Set(
+    props.trainingSeriesClassMembers
       .filter(n => n.training_series_id === parseInt(params.id))
-      .filter(n => n.recipient_id === n.team_member_id)
-      .map(n => n.team_member_id)
+      .map(n => n.class_member_id)
   );
-  const assignedMembers = props.teamMembers.filter(t => tmIDs.has(t.id));
+  const assignedMembers = props.classMembers.filter(t => cmIDs.has(t.id));
 
   return (
     <Paper className={classes.paper}>
       <HeaderContainer>
         <Typography variant="title" className={classes.assignedTitle}>
-          Assigned Team Members
+          Assigned Class Members
         </Typography>
         <Button
-          disabled={!props.teamMembers.length}
+          disabled={!props.classMembers.length}
           className={classes.assignButton}
           variant={"outlined"}
-          onClick={() => history.push(`/home/assign-members/${props.ts_id}`)}
+          onClick={() => history.push(`/home/assign-members/${id}`)}
         >
           {assignedMembers.length ? "Assign More Members" : "Assign Members"}
         </Button>
       </HeaderContainer>
       <List
         params={params}
-        teamMembers={assignedMembers.slice(offset, offset + limit)}
+        classMembers={assignedMembers.slice(offset, offset + limit)}
         history={history}
       />
-      {props.teamMembers.length && !assignedMembers.length && (
+      {props.classMembers.length && !assignedMembers.length && (
         <>
           <Typography variant="subheading" className={classes.messageTextTop}>
-            This training series currently does not have any team members
+            This training series currently does not have any class members
             assigned to it.
           </Typography>
           <Typography variant="subheading" className={classes.messageText}>
@@ -70,12 +71,12 @@ function Assign(props) {
           </Typography>
         </>
       )}
-      {!props.teamMembers.length && !assignedMembers.length && (
+      {!props.classMembers.length && !assignedMembers.length && (
         <Typography variant="subheading" className={classes.messageText}>
           <HolderText>
-            <p>You don't have any team members to assign.</p>
+            <p>You don't have any class members to assign.</p>
             <p>
-              <Link to="/home/create-team-member">Click here</Link> to add a
+              <Link to="/home/create-class-member">Click here</Link> to add a
               member to your account.
             </p>
           </HolderText>
@@ -94,11 +95,13 @@ function Assign(props) {
 
 const mapStateToProps = state => ({
   notifications: state.notificationsReducer.notifications,
-  teamMembers: state.teamMembersReducer.teamMembers,
+  classMembers: state.classMembersReducer.classMembers,
+  trainingSeriesClassMembers: state.trainingSeriesReducer.trainingSeriesClassMembers,
+
   messages: state.messagesReducer.messages
 });
 
 export default connect(
   mapStateToProps,
-  { getClassMember, getNotifications }
+  { getClassMember, getNotifications, getTrainingSeriesClassMembers }
 )(withStyles(styles)(Assign));

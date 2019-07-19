@@ -71,6 +71,7 @@ function Add(props) {
     const payload = !(
       state.classMember.first_name &&
       state.classMember.last_name &&
+      state.classMember.email &&
       !phoneNumberTest(state.classMember.phone_number)
     );
     dispatch({ type: "UPDATE_DISABLED", payload });
@@ -98,11 +99,6 @@ function Add(props) {
 
   const addNewClassMember = e => {
     e.preventDefault();
-    const { classMember } = state;
-
-    if (classMember.class_id === "") {
-      classMember.class_id = null; // TODO class id should not be null
-    }
     addClassMember(state.classMember);
     dispatch({ type: "TOGGLE_ROUTING" });
     dispatch({ type: "DISPLAY_SNACKBAR", payload: true });
@@ -120,12 +116,10 @@ function Add(props) {
         style={{ position: "relative" }}
         popOverText={
           <p>
-            On this page you can add a new Team Member! If you've already got
-            some Team Members, you can assign them as a mentor or a manager.
-            Whenever a team member is assigned to a training series, you can
-            choose to send their mentor or managers notifications as well. If
-            you've set up Slack in your preferences, you can choose to assign
-            this team member to their slack account.
+            On this page you can add a new Class Member! If you've already got
+            some Class Members, you can assign them as a class_id.
+            Whenever a class member is assigned to a training series, you can
+            choose to send them a notifications as well.
           </p>
         }
       />

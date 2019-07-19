@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 import EditClassMember from "../Add/";
-import NotificationsCard from "components/Pages/Notifications/Card/";
-import TeamMemberNotifications from "components/Pages/Notifications/Card/TeamMember";
+import NotificationsCard from "components/Feature/Notifications/Card/";
+import TeamMemberNotifications from "components/Feature/Notifications/Card/TeamMember";
 import Grid from "@material-ui/core/Grid";
 
 import {

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import history from "history.js";
 import DeleteModal from "components/UI/Modals/deleteModal";
 import { getClassMember, getClasses } from "store/actions";
-import { TeamsMember } from "./styles.js";
+import { Member } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
 function Tab({ user_id, getFiltered, getClassMember, classMembers, getClasses, classes }) {
@@ -16,7 +16,7 @@ function Tab({ user_id, getFiltered, getClassMember, classMembers, getClasses, c
 
   useEffect(() => {
     getClasses();
-  }, [ user_id]);
+  }, [getClasses, user_id]);
 
   // change classesArray to key-value pair, for better performance in accessing individual class.
   let classObj = {};
@@ -28,11 +28,11 @@ function Tab({ user_id, getFiltered, getClassMember, classMembers, getClasses, c
       {getFiltered(classMembers).map(classMember => {
         // TODO actually loop through classes and find the class name by id
         // const classObj = classObj[classMember.class_id];
-        const className = classObj ? `${classObj[classMember.class_id].title}`
+        const className = classObj ? "Not assigned (TODO: fix)"
           : "Not assigned (TODO: fix)";
 
         return (
-          <TeamsMember key={classMember.id}>
+          <Member key={classMember.id}>
             <div
               style={{ cursor: "pointer" }}
               onClick={() => {
@@ -58,7 +58,7 @@ function Tab({ user_id, getFiltered, getClassMember, classMembers, getClasses, c
               classMemberId={classMember.id}
               user_id={user_id}
             />
-          </TeamsMember>
+          </Member>
         );
       })}
     </div>
