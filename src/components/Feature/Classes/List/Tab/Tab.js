@@ -11,31 +11,26 @@ import {Typography} from "@material-ui/core/";
 function Tab({id, getFiltered, getClasses, classes}) {
     useEffect(() => {
         getClasses();
-
     }, [getClasses, id]);
 
     return (
 
         <div style={{display: "flex", flexWrap: "wrap"}}>
-            {getFiltered(classes).map(classObj => {
-                const className = classObj.title;
-                return (
+            {getFiltered(classes).map(classObj =>  (
                     <Classes key={classObj.id}>
-                        <div
-                            style={{cursor: "pointer"}}
+                        <div style={{cursor: "pointer"}}
                             onClick={()=> {
                                 history.push(`/home/class/${classObj.id}`);
                             }}
                         >
                             <Typography variant="subtitle1">
-                                {className}
+                                {classObj.className}
                             </Typography>
-                            <hr/>
                         </div>
                     </Classes>
 
-                );
-            })}
+                ))
+            }
         </div>
     );
 }
