@@ -38,7 +38,6 @@ export default function(Component) {
   return class Authenticate extends React.Component {
     render() {
       const token = localStorage.getItem("id_token");
-
       const notLoggedIn = (
         <>
           {/* NAVIGATION */}

@@ -14,7 +14,7 @@ import {
   unsubscribe,
   submit
 } from "store/actions/";
-import { getUser } from "store/actions/userActions";
+import { me } from "store/actions/userActions";
 
 //Material UI and Style Imports
 import {
@@ -463,6 +463,6 @@ export default connect(
     getCustomersPlan,
     unsubscribe,
     submit,
-    getUser
+    me
   }
 )(injectStripe(withStyles(styles)(CheckoutForm)));
